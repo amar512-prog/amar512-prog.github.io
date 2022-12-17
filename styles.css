@@ -47,21 +47,20 @@ a:visited {
   background: #eee;
 }
 
-@media (max-width: 460px) {
+@media () {
   #main {
     margin: 0;
   }
 }
 
 img {
-  max-width: 100%;
+  width: 10%;
   display: block;
   height: auto;
   margin: 0 auto;
 }
 
 #img-div {
-  background: white;
   padding: 10px;
   margin: 0;
 }
@@ -70,7 +69,7 @@ img {
   margin: 15px 0 5px 0;
 }
 
-@media (max-width: 460px) {
+@media () {
   #img-caption {
     font-size: 1.4rem;
   }
