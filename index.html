@@ -21,6 +21,7 @@
          </header>
       <ul>
         <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+        <li><a href="#api">API</a></li>
         <li>
           <a class="nav-link" href="#Adv_Comp_Arch">Advanced Computer Architecture</a>
         </li>
@@ -41,6 +42,83 @@
           <p>
             I have created this webpage to share my learnings.
           </p>
+        </article>
+      </section>
+      <section class="main-section" id="API">
+        <header>API</header>
+        <article>
+          <h1 id="api">API And Its Standard Creation (with Postman)</h1>
+          <h2 id="what-is-api">What is API?</h2>
+          <p>Application Programming Interfaces, or APIs, provide a way for different pieces of code (or a human and code) to
+            interact with one another. In context of web, the term API has become more specific and is now primarily used to
+            refer to web APIs. A web API is an interface between a client and a server, where the client sends requests and the
+            server responds to them.</p>
+          <h2 id="types-of-api-call">Types of API call</h2>
+          <ul>
+            <li>Safe - A safe request doesn't modify data on the server.</li>
+            <li>Idempotent - A request that returns same result no matter how many times it is called. It modifies the server
+              only in first call and doesn't make changes in subsequent call.</li>
+          </ul>
+          <h2 id="structure-of-api-request">Structure of API Request</h2>
+          <p>Every API request needs an endpoint and an action. In the web API, endpoint is basically an URL because API
+            endpoint specifies the resource that server is going to interact. Note: If web API endpoint start with / instead of http or
+            www, it means base API url is left out. API actions, also known as verbs, are used to specify the desired action
+            to be taken with a specified resource in an API call using endpoint. Different resources may have different valid API
+            actions, and some actions are more specialized for particular applications. The most commonly used API actions are
+            GET, POST, PUT, and DELETE. These actions are sometimes referred to as CRUD, which stands for Create, Read,
+            Update, and Delete.</p>
+          <p>When to use it is important to use the correct action when interacting with an API to ensure that the desired
+            action
+            is taken. The POST action is used to create new objects in an API, the GET action is used to read information
+            about
+            existing objects, the PUT action is used to modify existing objects, and the DELETE action is used to delete
+            objects.
+            Having an API that supports all aspects of CRUD gives a lot of flexibility and it is why these four actions are
+            the
+            most common ones that you will see. PATCH, OPTIONS, and HEAD are also used in APIs and their usage is similar to
+            the
+            four main actions, but are rarely used.</p>
+      
+          <h2 id="api-parameters">API Parameters</h2>
+          <p>API parameters are used to create standard structure in an API. They allow similar things to be grouped together
+            and
+            make it easier to retrieve specific information.</p>
+          <h3 id="request-parameters">Request Parameters</h3>
+          <p>Example: <code>GET https://api.github.com/users/:{username}/repos</code></p>
+          <p>Above example is the API call for getting the repositories for a particular user in GitHub. The username
+            parameter in
+            the API endpoint is known as a request parameter. These parameters act as replaceable strings in the API endpoint
+            and
+            are common in web APIs. They can also be represented using curly braces instead of a colon. The purpose of request
+            parameters in the example is replacing the username in the API endpoint to retrieve the repositories of different
+            users.</p>
+          <h3 id="query-parameters">Query parameters</h3>
+          <p>These parameters act as a filter or additional action that can be applied to an endpoint. They are represented by
+            a
+            question mark in the API endpoint and are specified with a key, which is the item being queried for, and a value,
+            which is what the query should return.</p>
+          <p>Example: <code>GET https://api.github.com/user/repos?type=member</code>
+          <p>This example shows repos that I am member of.</p>
+          <h2 id="api-header">API Header</h2>
+          <p>Every API request includes headers that provide background information about the client sending the request.</p>
+          <h2 id="api-body">API Body</h2>
+          <p>Every API request includes body that provide attribute of the resources. Generally, POST and PUT requires the
+            body
+            and it can be form-data, encoded form data, raw data, binary data, and even GraphQL data.</p>
+          <h2 id="api-response">API Response</h2>
+          <p>It is sent by server after processes the client information. Response includes body, cookies and headers.</p>
+          <h2 id="types-of-api">Types of API</h2>
+          <p>SOAP (Simple Object Access Protocol) is a messaging protocol that is used to exchange structured data between
+            applications over a network. It is an XML-based protocol and requires more overhead than RESTful APIs. It was
+            developed for corporate use cases and has strict rules in place for how the two sides of the interface can
+            interact
+            with each other.</p>
+          <p>REST (Representational State Transfer) is a web architecture and an approach to communications that is often used
+            in
+            the development of web services. It is a client-server protocol that is lightweight and simple, making it easier
+            to
+            develop and maintain than SOAP-based APIs.</p>
+      
         </article>
       </section>
       <section class="main-section" id="Coding">
@@ -65,6 +143,9 @@
           <li><strong>15/12/2022</strong> - Webpage created</li>
           <li>
             <strong>17/12/2022</strong> - HTML5 tutorial on https://www.freecodecamp.org/
+          </li>
+          <li>
+            <strong>17/01/2023</strong> - API creation in python using Postman
           </li>
         </ul>
         <blockquote cite="">
