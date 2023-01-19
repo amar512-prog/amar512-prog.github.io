@@ -118,7 +118,91 @@
             the development of web services. It is a client-server protocol that is lightweight and simple, making it easier
             to
             develop and maintain than SOAP-based APIs.</p>
-      
+            <h1>Steps in Ubuntu for Sample RESTful API in C++ using the Pistache library</h1>
+            <p>Creating a RESTful API in C++ can be done easily using the Pistache library. In this article, we will walk through
+              the steps to create a simple API that takes in two numbers as input and returns their sum in Ubuntu.</p>
+            <h2>Installing GCC and Pistache library</h2>
+            <p>The first step is to install GCC and the Pistache library. GCC is the compiler that will be used to build the API,
+              and Pistache is the library that provides the functionality to create the API.</p>
+            <p>To install GCC, run the following command in the terminal:</p>
+            <pre>
+              sudo apt-get install g++
+            </pre>
+            <p>To install Pistache library, run the following commands in the terminal:</p>
+            <pre>
+              sudo add-apt-repository ppa:pistache+team/stable
+              sudo apt update
+              sudo apt install libpistache-dev</pre>
+            <h2>Creating the API</h2>
+            <p>Next, create a new file with the name "api.cpp" and copy the following code into it:</p>
+            <pre>
+              #include &lt;pistache/endpoint.h&gt;
+              #include &lt;pistache/http.h&gt;
+              #include &lt;pistache/router.h&gt;
+              #include "rapidjson/document.h"
+              #include &lt;iostream&gt;
+              using namespace Pistache;
+              void add(const Rest::Request& req, Http::ResponseWriter resp)
+              {
+                rapidjson::Document doc;
+                doc.Parse(req.body().c_str());
+                int x = doc.HasMember("x") ? doc["x"].GetInt() : 0;
+                int y = doc.HasMember("y") ? doc["y"].GetInt() : 0;
+                int sum = x + y;
+                resp.send(Http::Code::Ok, "The result of addition of "+std::to_string(x)+" and "+std::to_string(y)+" is "+std::to_string(sum)+"\n");
+              }
+              
+              int main(int argc, char* argv[])
+              {
+                using namespace Rest;
+                Router router;      // POST/GET/etc. route handler
+                Port port(9900);    // port to listen on
+                Address addr(Ipv4::any(), port);
+                std::shared_ptr<Http::Endpoint> endpoint = std::make_shared<Http::Endpoint>(addr);
+                auto opts = Http::Endpoint::options().threads(1);   // how many threads for the server
+                endpoint->init(opts);
+              
+                Routes::Post(router, "/add", Routes::bind(&add));
+              
+                endpoint->setHandler(router.handler());
+                endpoint->serve();
+              }
+            </pre>
+            <p>This code creates an endpoint that listens on port 9900, and when a POST request is made to the endpoint with a JSON
+              payload containing "x" and "y" fields, it will return the sum of the two numbers.</p>
+            <h2>Compiling the code</h2>
+            <p>To compile the code, you can use the following Makefile:</p>
+            <pre>
+              # C++17 required for Pistache!
+              CCFLAGS=-O2 --std=c++17 -lpistache
+              all: server
+              server:
+                  g++ api.cpp $(CCFLAGS) -o server
+                
+              clean:
+                  rm server
+            </pre>
+            
+            <p>The Makefile compiles the code with the C++17 standard and links the Pistache library to the binary file.</p>
+            <h2>Running the API</h2>
+            <p>To run the API, execute the generated binary file by running the following command in the terminal:</p>
+            <pre>./server</pre>
+            <p>The API will now be running on localhost:9900 and ready to handle incoming requests.</p>
+            <h2>Testing the API</h2>
+            <p>To test the API, use a tool like curl or Postman to send a POST request to the endpoint with a JSON payload
+              containing the input numbers as "x" and "y" fields. For example, use the following command to test the API using curl:
+            </p>
+            <pre>
+              curl -i -X POST -H "Content-Type: application/json" -d '{"x": 5, "y": 3}' http://localhost:9900/add
+            </pre>
+            <p>This command sends a POST request to the endpoint at http://localhost:9900/add with a JSON payload containing the
+              numbers 5 and 3 as the "x" and "y" fields respectively. You should see the sum of the input numbers, in this case 8,
+              in the response.</p>
+            <p>It's also important to test for different scenarios like sending wrong data types, missing fields, etc to make sure
+              that the API is handling these cases and returning appropriate error messages.</p>
+            <p>In this article, we have covered the steps to create a simple RESTful API in C++ using the Pistache library in
+              Ubuntu. With the ability to handle incoming requests and return responses, you can now build more complex APIs and
+              expand the functionality to meet your needs.</p>
         </article>
       </section>
       <section class="main-section" id="Coding">
@@ -126,13 +210,13 @@
         <article>
           <p>
             In c++, some of tips to make running time more effieciens are as follows:<br>
-             <strong>19/12/2022</strong>
-             <ul>
-               <li>use addition in case of multiplication if possible</li>
-               <li>To count the number of 1s in an input: int __builtin_popcount (unsigned int x)</li>
-                <li>Be careful about duplicate (repeat same expression) computation</li>
-                <li></li>
-             </ul>
+            <strong>19/12/2022</strong>
+            <ul>
+            <li>use addition in case of multiplication if possible</li>
+            <li>To count the number of 1s in an input: int __builtin_popcount (unsigned int x)</li>
+            <li>Be careful about duplicate (repeat same expression) computation</li>
+            
+            </ul>
              
           </p>
         </article>
