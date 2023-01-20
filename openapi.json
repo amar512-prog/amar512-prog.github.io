@@ -1,0 +1,57 @@
+{
+    "info": {
+        "title": "Sum API",
+        "version": "1.0.0"
+    },
+    "openapi": "3.0.0",
+    "paths": [
+        {
+            "/sum": {
+                "get": {
+                    "operationId": "getSum",
+                    "parameters": [
+                        {
+                            "description": "The first number",
+                            "in": "query",
+                            "name": "x",
+                            "required": true,
+                            "schema": {
+                                "type": "integer"
+                            }
+                        },
+                        {
+                            "description": "The second number",
+                            "in": "query",
+                            "name": "y",
+                            "required": true,
+                            "schema": {
+                                "type": "integer"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "description": "The sum of the two numbers"
+                        }
+                    },
+                    "summary": "Returns the sum of two numbers",
+                    "tags": [
+                        "sum"
+                    ]
+                }
+            }
+        }
+    ],
+    "servers": [
+        {
+            "url": "http://localhost:9080"
+        }
+    ]
+}
