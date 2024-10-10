@@ -1,5 +1,5 @@
 // Make an HTTP GET request to the OpenWeatherMap API
-fetch('https://api.openweathermap.org/data/2.5/weather?q=New%20Delhi&appid=565f792c8c70e572d7f3fa7d03ff7c57')
+fetch('https://api.openweathermap.org/data/2.5/weather?q=New%20Delhi&appid=6557810176c36fac5f0db536711a6c52')
   .then(response => response.json())
   .then(data => {
     // Extract the weather information from the response
