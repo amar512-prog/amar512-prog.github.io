@@ -5,12 +5,12 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q=New%20Delhi&appid=565f7
   .then(data => {
     // Extract the weather information from the response
     const weather = data.weather[0];
-    const temperature = data.main.temp;
+    const temperature = data.main.temp - 273.15;
     const humidity = data.main.humidity;
 
     // Print the weather information
     console.log(`Today's weather in New Delhi, India: ${weather.description}`);
-    console.log(`Temperature: ${temperature} K`);
+    console.log(`Temperature: ${temperature} C`);
     console.log(`Humidity: ${humidity}%`);
     // Update the weather information on the webpage
     document.getElementById('temp-value').textContent = temperature;
