@@ -13,7 +13,7 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q=New%20Delhi&appid=565f7
     console.log(`Temperature: ${temperature} C`);
     console.log(`Humidity: ${humidity}%`);
     // Update the weather information on the webpage
-    document.getElementById('temp-value').textContent = temperature;
+    document.getElementById('temp-value').textContent = temperature.toFixed(2);
     document.getElementById('humidity-value').textContent = humidity;
     document.getElementById('weather-desc-value').textContent = weather.description;
 
