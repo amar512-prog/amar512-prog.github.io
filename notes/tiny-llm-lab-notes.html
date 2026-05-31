@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tiny LLM Lab Notes | Amar Agnihotri</title>
+    <meta
+      name="description"
+      content="A practical lab note on training a small GPT-style language model locally with MLX, including architecture details, checkpoints, evaluation choices, and next experiments."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="../styles.css?v=20260531n">
+    <script src="../src/js/page-support.js?v=20260531m" defer></script>
+    <script src="../src/js/page-comments.js?v=20260531i" defer></script>
+  </head>
+  <body class="site-shell article-page">
+    <header class="site-header">
+      <div class="container header-bar">
+        <a class="brand" href="../index.html" aria-label="Back to homepage">
+          <span class="brand-mark">AA</span>
+          <span class="brand-copy">
+            <strong>Amar Agnihotri</strong>
+            <span>Research reviews, systems notes, and practical learning logs.</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../index.html#notes">Lab Notes</a>
+          <a href="../index.html#research">Research Reviews</a>
+          <a href="../pytorch_framework/pytorch_framework.html">PyTorch Note</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="article-hero">
+        <div class="container">
+          <div class="article-shell">
+            <p class="eyebrow">Lab note</p>
+            <p class="article-meta">MLX training log • tiny GPT architecture • checkpoint notes</p>
+            <h1>Tiny LLM lab notes from a local MLX training run</h1>
+            <p class="article-summary">
+              This page documents a compact GPT-style language model trained locally on
+              Apple Silicon. It keeps the useful pieces together in one place: what the
+              project already supports, how the model is built, which checkpoint is the
+              safest one to reuse, and what to try next.
+            </p>
+            <div class="article-actions">
+              <a class="button" href="../index.html#notes">Back to lab notes</a>
+              <a class="button button-secondary" href="../index.html#research">
+                Browse research reviews
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <article class="article-shell article-prose">
+            <h2>Current snapshot</h2>
+            <p>
+              The goal of this project is to train a very small decoder-only language
+              model from scratch on Apple Silicon using MLX. The current working dataset
+              is <code>data/tiny_shakespeare.txt</code>, the main tokenizer lives in
+              <code>src/tiny_llm/tokenizer.py</code>, and the recommended checkpoint is
+              <code>checkpoints/shakespeare_bpe_seq/best</code>.
+            </p>
+
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Checkpoint</th>
+                    <th>Tokenizer</th>
+                    <th>Step</th>
+                    <th>Train loss</th>
+                    <th>Validation loss</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>shakespeare_bpe_seq/best</code></td>
+                    <td>BPE, vocab 512</td>
+                    <td>20000</td>
+                    <td>2.4669</td>
+                    <td>3.0312</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>What the project already has</h2>
+            <ul>
+              <li>Character-level tokenization for the simplest end-to-end training path.</li>
+              <li>Byte-level BPE tokenization for a more realistic small-model setup.</li>
+              <li>GPT-style decoder blocks with causal self-attention.</li>
+              <li>Checkpoint save, resume, and best-checkpoint tracking.</li>
+              <li>Deterministic sequential evaluation for more stable checkpoint comparisons.</li>
+              <li>Sampling controls including <code>top-k</code>, <code>top-p</code>, repetition penalty, and repetition windows.</li>
+            </ul>
+
+            <h2>Model architecture in detail</h2>
+            <p>
+              The model is implemented as <code>MiniGPT</code> in
+              <code>src/tiny_llm/model.py</code>. It is intentionally small enough to
+              inspect end to end without losing the core ideas of a real Transformer.
+            </p>
+
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Config field</th>
+                    <th>Value</th>
+                    <th>What it controls</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>block_size</code></td>
+                    <td>128</td>
+                    <td>Maximum number of previous tokens the model can use as context.</td>
+                  </tr>
+                  <tr>
+                    <td><code>n_layer</code></td>
+                    <td>4</td>
+                    <td>Number of stacked Transformer blocks.</td>
+                  </tr>
+                  <tr>
+                    <td><code>n_head</code></td>
+                    <td>4</td>
+                    <td>Number of attention heads inside each block.</td>
+                  </tr>
+                  <tr>
+                    <td><code>n_embd</code></td>
+                    <td>128</td>
+                    <td>Width of the model representation for each token.</td>
+                  </tr>
+                  <tr>
+                    <td><code>dropout</code></td>
+                    <td>0.1</td>
+                    <td>Regularization used in the embeddings, attention, and feed-forward layers.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>End-to-end forward path</h3>
+            <ol>
+              <li>The input arrives as token IDs with shape <code>(batch, tokens)</code>.</li>
+              <li>Each token ID becomes a learned token embedding of width <code>128</code>.</li>
+              <li>Each position gets its own learned position embedding, also width <code>128</code>.</li>
+              <li>Token and position embeddings are added together and passed through dropout.</li>
+              <li>The representation flows through 4 Transformer blocks in sequence.</li>
+              <li>A final <code>LayerNorm</code> is applied.</li>
+              <li>A linear language-model head projects each position into <code>vocab_size</code> logits.</li>
+            </ol>
+
+            <h3>Transformer block layout</h3>
+            <p>Each block uses a pre-norm residual structure:</p>
+            <pre class="equation-block">x = x + attention(LayerNorm(x))
+x = x + feed_forward(LayerNorm(x))</pre>
+            <p>
+              In practice, that means each block learns a refinement on top of the
+              running representation instead of rebuilding the full state from scratch.
+            </p>
+
+            <h3>Attention details</h3>
+            <ul>
+              <li>A single linear layer creates query, key, and value projections together.</li>
+              <li>Those tensors are split into 4 attention heads.</li>
+              <li>Each head gets <code>32</code> channels because <code>128 / 4 = 32</code>.</li>
+              <li>Attention scores are scaled by <code>head_dim ** -0.5</code>.</li>
+              <li>A lower-triangular causal mask blocks any lookahead into future tokens.</li>
+              <li>Softmax turns the masked scores into attention weights.</li>
+              <li>The head outputs are recombined, projected back to width <code>128</code>, and passed through residual dropout.</li>
+            </ul>
+
+            <h3>Feed-forward path and generation loop</h3>
+            <p>
+              After attention, each block uses a two-layer MLP that expands the hidden
+              width from <code>128</code> to <code>512</code>, applies a
+              <code>GELU</code>, then projects back down to <code>128</code>. During
+              generation, the model crops context to the most recent 128 tokens, uses the
+              last-position logits, applies temperature and optional sampling controls,
+              samples one token, appends it, and repeats.
+            </p>
+
+            <h2>Main milestones</h2>
+
+            <h3>1. Tiny smoke model</h3>
+            <p>
+              The earliest run existed mainly to prove that training, checkpoint saving,
+              and generation all worked on a very small corpus. That checkpoint still
+              lives in <code>checkpoints/tiny</code>.
+            </p>
+
+            <h3>2. Character model on Tiny Shakespeare</h3>
+            <p>
+              The first larger Shakespeare run used character tokens and reached a best
+              validation loss of <code>1.6525</code> at step <code>5500</code> with a
+              vocabulary size of <code>65</code>. It learned line structure and speaker
+              patterns well, but it still broke words apart because it predicted one
+              character at a time.
+            </p>
+
+            <h3>3. BPE model on Tiny Shakespeare</h3>
+            <p>
+              The project then moved to byte-level BPE with a vocabulary size of
+              <code>512</code>. That made the model predict larger word pieces instead of
+              isolated characters. The best checkpoint from this stage reached a
+              validation loss of <code>3.0356</code> at step <code>17000</code>.
+            </p>
+
+            <h3>4. Deterministic best-checkpoint tracking</h3>
+            <p>
+              The current recommended run uses deterministic sequential evaluation, which
+              makes validation comparisons repeatable instead of noisy. That is why
+              <code>checkpoints/shakespeare_bpe_seq/best</code> is the safest default
+              checkpoint to reuse for generation examples or follow-up training.
+            </p>
+
+            <h2>Why the current checkpoint matters</h2>
+            <p>
+              One of the practical lessons from this project was that resumed training
+              can quietly drift if the context length is not carried forward correctly.
+              The current BPE sequential checkpoint reflects the later fixes: stable
+              context handling, cleaner evaluation, and checkpoint comparisons that are
+              easier to trust.
+            </p>
+
+            <div class="callout">
+              A smaller loss on the character model does not automatically make it the
+              better checkpoint. Those losses are measured over different token spaces,
+              so comparisons are most meaningful within the same tokenizer setup.
+            </div>
+
+            <h2>Recommended commands</h2>
+
+            <h3>Setup</h3>
+            <pre class="code-block">python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python setup.py develop</pre>
+
+            <h3>Download Tiny Shakespeare</h3>
+            <pre class="code-block">.venv/bin/python scripts/download_tiny_shakespeare.py</pre>
+
+            <h3>Run tests</h3>
+            <pre class="code-block">.venv/bin/python -m unittest discover -s tests</pre>
+            <p>
+              In restricted sandboxed environments, MLX can still fail during Metal
+              initialization. If that happens, rerun the verification directly on the
+              host Mac before treating it as a code regression.
+            </p>
+
+            <h3>Train a fresh BPE run</h3>
+            <pre class="code-block">.venv/bin/python -m tiny_llm.train \
+  --data data/tiny_shakespeare.txt \
+  --out-dir checkpoints/shakespeare_bpe \
+  --tokenizer bpe \
+  --vocab-size 512 \
+  --max-steps 1500 \
+  --eval-interval 300 \
+  --eval-iters 20 \
+  --batch-size 32 \
+  --block-size 128 \
+  --n-layer 4 \
+  --n-head 4 \
+  --n-embd 128 \
+  --device gpu</pre>
+
+            <h3>Continue from the current best deterministic checkpoint</h3>
+            <pre class="code-block">.venv/bin/python -m tiny_llm.train \
+  --data data/tiny_shakespeare.txt \
+  --init-from checkpoints/shakespeare_bpe_seq/best \
+  --out-dir checkpoints/shakespeare_bpe_seq \
+  --max-steps 2000 \
+  --eval-interval 1000 \
+  --eval-mode sequential \
+  --batch-size 32 \
+  --learning-rate 4e-5 \
+  --lr-schedule cosine \
+  --min-learning-rate 8e-6 \
+  --warmup-steps 100 \
+  --grad-clip 1.0 \
+  --device gpu</pre>
+
+            <h3>Generate text from the recommended checkpoint</h3>
+            <pre class="code-block">.venv/bin/python -m tiny_llm.generate \
+  --checkpoint checkpoints/shakespeare_bpe_seq/best \
+  --prompt "KING HENRY:" \
+  --max-new-tokens 250 \
+  --temperature 0.4 \
+  --top-k 12 \
+  --top-p 0.85 \
+  --repetition-penalty 1.2 \
+  --repetition-window 96 \
+  --device gpu</pre>
+
+            <h2>Best next experiments</h2>
+            <ul>
+              <li>Train a slightly wider or deeper model while keeping the same evaluation discipline.</li>
+              <li>Compare several BPE vocabulary sizes instead of only <code>512</code>.</li>
+              <li>Automate plots from <code>metrics.csv</code> so progress is easier to inspect.</li>
+              <li>Try a second dataset such as TinyStories for cleaner language patterns.</li>
+              <li>Keep deterministic validation as the default path for checkpoint decisions.</li>
+            </ul>
+
+            <div class="summary-box">
+              <p>
+                The reason this note matters is not that the model is huge. It is that
+                the project is small enough to understand fully while still containing
+                the real moving parts of a GPT-style system: tokenization, attention,
+                residual blocks, checkpoints, validation, and sampling.
+              </p>
+            </div>
+
+            <div class="article-nav">
+              <a href="../index.html#notes">Back to lab notes</a>
+              <a href="../pytorch_framework/pytorch_framework.html">PyTorch Quickstart</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section page-support-section">
+        <div class="container">
+          <section class="article-shell page-support" data-page-support></section>
+        </div>
+      </section>
+
+      <section class="section page-chat-section">
+        <div class="container">
+          <section class="article-shell page-chat" data-page-chat></section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
