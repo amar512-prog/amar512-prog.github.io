@@ -21,8 +21,8 @@
 
     <div class="page-chat__status">
       <p>
-        This thread is mapped to the current page path, so each note or paper review keeps
-        its own discussion stream.
+        Use this space to ask a question, share a takeaway, or add a useful follow-up to
+        the piece.
       </p>
     </div>
 
