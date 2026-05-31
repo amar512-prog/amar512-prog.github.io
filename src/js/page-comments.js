@@ -5,32 +5,48 @@
     return;
   }
 
+  const repo = "amar512-prog/amar512-prog.github.io";
+  const pageKey = window.location.pathname.replace(/^\/+/, "") || "index.html";
+  const pageTitle =
+    document.querySelector("h1")?.textContent?.trim() || document.title.trim();
+  const pageUrl = `${window.location.origin}${window.location.pathname}`;
+  const issueTitle = `Page discussion: ${pageKey}`;
+  const searchQuery = `is:issue repo:${repo} in:title "${issueTitle}"`;
+  const searchUrl = `https://github.com/${repo}/issues?q=${encodeURIComponent(searchQuery)}`;
+  const newIssueBody = [
+    `Page title: ${pageTitle}`,
+    `Page path: /${pageKey}`,
+    `Page URL: ${pageUrl}`,
+    "",
+    "Use this issue as the public discussion thread for this page."
+  ].join("\n");
+  const newIssueUrl =
+    `https://github.com/${repo}/issues/new?title=${encodeURIComponent(issueTitle)}` +
+    `&body=${encodeURIComponent(newIssueBody)}`;
+
   mount.innerHTML = `
     <div class="page-chat__head">
       <p class="eyebrow">Discussion</p>
-      <h2>Join the page conversation</h2>
+      <h2>Discuss this page on GitHub</h2>
       <p class="page-chat__intro">
-        Comments for this page are powered by GitHub Issues and matched by page path.
-        You will sign in with GitHub when you want to comment.
+        Each article and note can have one shared GitHub issue thread keyed to its page path.
+        If a thread already exists, open it. If not, start one with the prefilled draft below.
       </p>
     </div>
 
     <div class="page-chat__status">
       <p>
-        If the discussion frame takes a moment to load, give it a second and then try again.
+        This page uses the repository issue tracker instead of an embedded app, so the
+        discussion stays readable even when the site is hosted statically.
       </p>
+      <div class="article-actions page-chat__actions">
+        <a class="button" href="${searchUrl}" target="_blank" rel="noreferrer">
+          View page thread
+        </a>
+        <a class="button button-secondary" href="${newIssueUrl}" target="_blank" rel="noreferrer">
+          Start thread
+        </a>
+      </div>
     </div>
-
-    <div class="page-chat__embed" data-utterances-root></div>
   `;
-
-  const script = document.createElement("script");
-  script.src = "https://utteranc.es/client.js";
-  script.async = true;
-  script.crossOrigin = "anonymous";
-  script.setAttribute("repo", "amar512-prog/amar512-prog.github.io");
-  script.setAttribute("issue-term", "pathname");
-  script.setAttribute("theme", "github-light");
-
-  mount.querySelector("[data-utterances-root]")?.appendChild(script);
 })();

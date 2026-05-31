@@ -637,6 +637,10 @@ figcaption {
   max-width: 68ch;
 }
 
+.page-chat__actions {
+  margin-top: 1rem;
+}
+
 .page-chat__head {
   display: grid;
   gap: 0.75rem;
@@ -649,14 +653,6 @@ figcaption {
 .page-chat__feed {
   display: grid;
   gap: 0.9rem;
-}
-
-.page-chat__embed {
-  max-width: 68ch;
-}
-
-.page-chat__embed .utterances {
-  max-width: 100%;
 }
 
 .page-chat__message,
