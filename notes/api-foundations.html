@@ -6,7 +6,7 @@
     <title>API Foundations | Amar Agnihotri</title>
     <meta
       name="description"
-      content="An older Amar Agnihotri note, reformatted for the web, covering API basics and a sample RESTful API in C++ with Pistache."
+      content="A practical Amar Agnihotri reference note covering API basics and a sample RESTful API in C++ with Pistache."
     >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,13 +38,12 @@
       <section class="article-hero">
         <div class="container">
           <div class="article-shell">
-            <p class="eyebrow">Classic note, reformatted</p>
-            <p class="article-meta">API basics • original diary material preserved</p>
+            <p class="eyebrow">Reference note</p>
+            <p class="article-meta">API basics • implementation reference</p>
             <h1>API foundations and a sample RESTful API in C++</h1>
             <p class="article-summary">
-              This page keeps the original API tutorial content from the older version of
-              the site, but lays it out in a calmer long-form format. It starts with core
-              API concepts and ends with a small Pistache-based C++ example.
+              This page is a compact API reference that starts with core concepts and ends
+              with a small Pistache-based C++ example you can use as a practical template.
             </p>
             <div class="article-actions">
               <a class="button" href="../openapi.json">Open the OpenAPI artifact</a>
@@ -144,9 +143,9 @@
 
             <h2>Sample RESTful API in C++ Using Pistache</h2>
             <p>
-              The original note also included a simple Ubuntu walkthrough for building a
-              RESTful API in C++ with the Pistache library. The goal is a tiny API that
-              accepts two numbers and returns their sum.
+              This section walks through a simple Ubuntu setup for building a RESTful API
+              in C++ with the Pistache library. The goal is a tiny API that accepts two
+              numbers and returns their sum.
             </p>
 
             <h3>Installing GCC and Pistache</h3>
@@ -206,7 +205,7 @@ int main(int argc, char* argv[])
             </p>
 
             <h3>Compiling the Code</h3>
-            <p>A simple Makefile from the original note:</p>
+            <p>A simple Makefile for compiling the example:</p>
             <pre class="code-block"># C++17 required for Pistache!
 CCFLAGS=-O2 --std=c++17 -lpistache
 
@@ -235,9 +234,9 @@ clean:
 
             <div class="summary-box">
               <p>
-                This older note still holds up as a quick primer: understand endpoints,
-                verbs, parameters, headers, and payloads first, then reinforce the ideas
-                by building one tiny RESTful API yourself.
+                This note works as a quick primer: understand endpoints, verbs,
+                parameters, headers, and payloads first, then reinforce the ideas by
+                building one tiny RESTful API yourself.
               </p>
             </div>
 
