@@ -1,76 +1,100 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PyTorch Quickstart Notes | Amar Agnihotri</title>
+    <meta
+      name="description"
+      content="A short PyTorch quickstart note covering what the framework is and how to install it with conda or pip."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body class="site-shell article-page">
+    <header class="site-header">
+      <div class="container header-bar">
+        <a class="brand" href="../index.html" aria-label="Back to homepage">
+          <span class="brand-mark">AA</span>
+          <span class="brand-copy">
+            <strong>Amar Agnihotri</strong>
+            <span>Research reviews, systems notes, and practical learning logs.</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../index.html#research">Research Reviews</a>
+          <a href="../index.html#notes">Lab Notes</a>
+          <a href="https://github.com/amar512-prog/amar512-prog.github.io">GitHub</a>
+        </nav>
+      </div>
+    </header>
 
-<html>  
-   <head> 
-      <meta charset = "utf-8"> 
-      <title>AMAR AGNIHOTRI's Diary</title> 
-      <link rel="stylesheet" href="../styles.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-      <script src="../src/js/weather.js"></script>
-   </head> 
-  
-   <body> 
-      <main id="main-doc">
-      <nav id="navbar">
-      <header roll="banner">
-         <p align="center">Writes Anything as I Muse</p>
-         <p align="center">New Delhi, India <br> Weather Today</p>
-           <div align="center" id="weather-info">
-             <div id="temperature">
-               <i class="fas fa-thermometer-half"></i>
-               <span id="temp-value">--</span> &deg;C
-             </div>
-             <div id="humidity">
-               <i class="fas fa-tint"></i>
-               <span id="humidity-value">--</span>%
-             </div>
-             <div id="weather-description">
-               <i class="fas fa-sun"></i>
-               <span id="weather-desc-value">--</span>
-             </div>
-           </div>
-         </header>
-      <ul>
-        <li><a class="nav-link" href="#Introduction">Introduction</a></li>
-      </ul>
-    </nav>
-      <article> 
-         <section> 
-            <p></p>
-         </section> 
-      </article> 
-      <section class="main-section" id="Introduction">
-        <header>Introduction</header>
-        <article>
-            <p>
-            PyTorch is a open-source machine learning framework, designed for deep learning applications, developed by Facebook's AI Research Lab (FAIR). 
-            </p>
-            <h2>Installation</h2>
-            <p>There are two ways to install PyTorch: via Anaconda or via pip.</p>
-            <h3>Anaconda</h3>
-                <p>To install PyTorch via Anaconda, use the following conda command:</p>
-                <pre>
-                    <code>conda install pytorch torchvision -c pytorch</code>
-                </pre>
-            <h3>pip</h3>
-                <p>To install PyTorch via pip, use one of the following two commands, depending on your Python version:</p>
-                <pre>
-                    <code># Python 3.x
-                    pip3 install torch torchvision</code>
-                </pre>
-        </article>
+    <main>
+      <section class="article-hero">
+        <div class="container">
+          <div class="article-shell">
+            <p class="eyebrow">Framework note</p>
+            <div class="article-layout">
+              <div>
+                <p class="article-meta">PyTorch • starter reference</p>
+                <h1>PyTorch quickstart notes for getting moving fast</h1>
+                <p class="article-summary">
+                  PyTorch is an open-source machine learning framework widely used for
+                  deep learning research and production work. This page keeps the basic
+                  "what is it?" and "how do I install it?" answers in one place.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
-      
-      
-      
-      
-      <aside> 
-         <p></p> 
-      </aside> 
-   
-      <footer> 
-         <p></p> 
-      </footer> 
+
+      <section class="section">
+        <div class="container">
+          <article class="article-shell article-prose">
+            <h2>What is PyTorch?</h2>
+            <p>
+              PyTorch is an open-source machine learning framework designed for deep
+              learning applications and developed by Facebook's AI Research Lab (FAIR).
+              It is especially popular because it is flexible, Python-friendly, and
+              pleasant to use for both experimentation and production pipelines.
+            </p>
+
+            <h2>Installation</h2>
+            <p>Two common installation paths are still the easiest to remember:</p>
+
+            <h3>Install with Anaconda</h3>
+            <p>
+              If you manage environments with `conda`, this is a straightforward
+              starting point.
+            </p>
+            <pre class="code-block">conda install pytorch torchvision -c pytorch</pre>
+
+            <h3>Install with pip</h3>
+            <p>
+              If you prefer a lighter Python setup, install with `pip` instead.
+            </p>
+            <pre class="code-block"># Python 3.x
+pip3 install torch torchvision</pre>
+
+            <div class="callout">
+              These commands are enough for a quick start note, but in practice you
+              should still confirm the latest CUDA or CPU-only install guidance from the
+              official PyTorch website when setting up a real environment.
+            </div>
+
+            <div class="article-actions">
+              <a class="button" href="../index.html#notes">Back to lab notes</a>
+              <a class="button button-secondary" href="../index.html#research">Browse research reviews</a>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
-   </body> 
-</html> 
+  </body>
+</html>

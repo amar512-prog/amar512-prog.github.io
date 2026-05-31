@@ -1,268 +1,277 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Amar Agnihotri | Research Reviews and Lab Notes</title>
+    <meta
+      name="description"
+      content="Amar Agnihotri's web notebook for research paper reviews, machine learning notes, and practical software engineering references."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+    <script src="src/js/weather.js" defer></script>
+  </head>
+  <body class="site-shell">
+    <header class="site-header">
+      <div class="container header-bar">
+        <a class="brand" href="index.html" aria-label="Amar Agnihotri home">
+          <span class="brand-mark">AA</span>
+          <span class="brand-copy">
+            <strong>Amar Agnihotri</strong>
+            <span>Research reviews, systems notes, and practical learning logs.</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#research">Research Reviews</a>
+          <a href="#notes">Lab Notes</a>
+          <a href="#timeline">Timeline</a>
+          <a href="https://github.com/amar512-prog/amar512-prog.github.io">GitHub</a>
+        </nav>
+      </div>
+    </header>
 
-<html>  
-   <head> 
-      <meta charset = "utf-8"> 
-      <title>AMAR AGNIHOTRI's Diary</title> 
-      <link rel="stylesheet" href="styles.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-      <script src="src/js/weather.js"></script>
-   </head> 
-  
-   <body> 
-      <main id="main-doc">
-      <nav id="navbar">
-      <header roll="banner">
-         <p align="center">Writes Anything as I Muse</p>
-         <p align="center">New Delhi, India <br> Weather Today</p>
-           <div align="center" id="weather-info">
-             <div id="temperature">
-               <i class="fas fa-thermometer-half"></i>
-               <span id="temp-value">--</span> &deg;C
-             </div>
-             <div id="humidity">
-               <i class="fas fa-tint"></i>
-               <span id="humidity-value">--</span>%
-             </div>
-             <div id="weather-description">
-               <i class="fas fa-sun"></i>
-               <span id="weather-desc-value">--</span>
-             </div>
-           </div>
-         </header>
-      <ul>
-        <li><a class="nav-link" href="#Introduction">Introduction</a></li>
-        <li><a href="#api">API</a></li>
-        <li><a class="nav-link" href="pytorch_framework/pytorch_framework.html">Pytorch Framework</a></li>
-        <li>
-          <a class="nav-link" href="#Adv_Comp_Arch">Advanced Computer Architecture</a>
-        </li>
-        <li>
-          <a class="nav-link" href="#Coding">Contest Coding Tips</a>
-        </li>
-        <li><a class="nav-link" href="#Reference">Reference</a></li>
-      </ul>
-    </nav>
-      <article> 
-         <section> 
-            <p></p>
-         </section> 
-      </article> 
-      <section class="main-section" id="Introduction">
-        <header>Introduction</header>
-        <article>
-          <p>
-            I have created this webpage to share my learnings.
-          </p>
-        </article>
-      </section>
-      <section class="main-section" id="API">
-        <header>API</header>
-        <article>
-          <h1 id="api">API And Its Standard Creation (with Postman)</h1>
-          <h2 id="what-is-api">What is API?</h2>
-          <p>Application Programming Interfaces, or APIs, provide a way for different pieces of code (or a human and code) to
-            interact with one another. In context of web, the term API has become more specific and is now primarily used to
-            refer to web APIs. A web API is an interface between a client and a server, where the client sends requests and the
-            server responds to them.</p>
-          <h2 id="types-of-api-call">Types of API call</h2>
-          <ul>
-            <li>Safe - A safe request doesn't modify data on the server.</li>
-            <li>Idempotent - A request that returns same result no matter how many times it is called. It modifies the server
-              only in first call and doesn't make changes in subsequent call.</li>
-          </ul>
-          <h2 id="structure-of-api-request">Structure of API Request</h2>
-          <p>Every API request needs an endpoint and an action. In the web API, endpoint is basically an URL because API
-            endpoint specifies the resource that server is going to interact. Note: If web API endpoint start with / instead of http or
-            www, it means base API url is left out. API actions, also known as verbs, are used to specify the desired action
-            to be taken with a specified resource in an API call using endpoint. Different resources may have different valid API
-            actions, and some actions are more specialized for particular applications. The most commonly used API actions are
-            GET, POST, PUT, and DELETE. These actions are sometimes referred to as CRUD, which stands for Create, Read,
-            Update, and Delete.</p>
-          <p>When to use it is important to use the correct action when interacting with an API to ensure that the desired
-            action
-            is taken. The POST action is used to create new objects in an API, the GET action is used to read information
-            about
-            existing objects, the PUT action is used to modify existing objects, and the DELETE action is used to delete
-            objects.
-            Having an API that supports all aspects of CRUD gives a lot of flexibility and it is why these four actions are
-            the
-            most common ones that you will see. PATCH, OPTIONS, and HEAD are also used in APIs and their usage is similar to
-            the
-            four main actions, but are rarely used.</p>
-      
-          <h2 id="api-parameters">API Parameters</h2>
-          <p>API parameters are used to create standard structure in an API. They allow similar things to be grouped together
-            and
-            make it easier to retrieve specific information.</p>
-          <h3 id="request-parameters">Request Parameters</h3>
-          <p>Example: <code>GET https://api.github.com/users/:{username}/repos</code></p>
-          <p>Above example is the API call for getting the repositories for a particular user in GitHub. The username
-            parameter in
-            the API endpoint is known as a request parameter. These parameters act as replaceable strings in the API endpoint
-            and
-            are common in web APIs. They can also be represented using curly braces instead of a colon. The purpose of request
-            parameters in the example is replacing the username in the API endpoint to retrieve the repositories of different
-            users.</p>
-          <h3 id="query-parameters">Query parameters</h3>
-          <p>These parameters act as a filter or additional action that can be applied to an endpoint. They are represented by
-            a
-            question mark in the API endpoint and are specified with a key, which is the item being queried for, and a value,
-            which is what the query should return.</p>
-          <p>Example: <code>GET https://api.github.com/user/repos?type=member</code>
-          <p>This example shows repos that I am member of.</p>
-          <h2 id="api-header">API Header</h2>
-          <p>Every API request includes headers that provide background information about the client sending the request.</p>
-          <h2 id="api-body">API Body</h2>
-          <p>Every API request includes body that provide attribute of the resources. Generally, POST and PUT requires the
-            body
-            and it can be form-data, encoded form data, raw data, binary data, and even GraphQL data.</p>
-          <h2 id="api-response">API Response</h2>
-          <p>It is sent by server after processes the client information. Response includes body, cookies and headers.</p>
-          <h2 id="types-of-api">Types of API</h2>
-          <p>SOAP (Simple Object Access Protocol) is a messaging protocol that is used to exchange structured data between
-            applications over a network. It is an XML-based protocol and requires more overhead than RESTful APIs. It was
-            developed for corporate use cases and has strict rules in place for how the two sides of the interface can
-            interact
-            with each other.</p>
-          <p>REST (Representational State Transfer) is a web architecture and an approach to communications that is often used
-            in
-            the development of web services. It is a client-server protocol that is lightweight and simple, making it easier
-            to
-            develop and maintain than SOAP-based APIs.</p>
-            <h1>Steps in Ubuntu for Sample RESTful API in C++ using the Pistache library</h1>
-            <p>Creating a RESTful API in C++ can be done easily using the Pistache library. In this article, we will walk through
-              the steps to create a simple API that takes in two numbers as input and returns their sum in Ubuntu.</p>
-            <h2>Installing GCC and Pistache library</h2>
-            <p>The first step is to install GCC and the Pistache library. GCC is the compiler that will be used to build the API,
-              and Pistache is the library that provides the functionality to create the API.</p>
-            <p>To install GCC, run the following command in the terminal:</p>
-            <pre>
-              sudo apt-get install g++
-            </pre>
-            <p>To install Pistache library, run the following commands in the terminal:</p>
-            <pre>
-              sudo add-apt-repository ppa:pistache+team/stable
-              sudo apt update
-              sudo apt install libpistache-dev</pre>
-            <h2>Creating the API</h2>
-            <p>Next, create a new file with the name "api.cpp" and copy the following code into it:</p>
-            <pre>
-              #include &lt;pistache/endpoint.h&gt;
-              #include &lt;pistache/http.h&gt;
-              #include &lt;pistache/router.h&gt;
-              #include "rapidjson/document.h"
-              #include &lt;iostream&gt;
-              using namespace Pistache;
-              void add(const Rest::Request& req, Http::ResponseWriter resp)
-              {
-                rapidjson::Document doc;
-                doc.Parse(req.body().c_str());
-                int x = doc.HasMember("x") ? doc["x"].GetInt() : 0;
-                int y = doc.HasMember("y") ? doc["y"].GetInt() : 0;
-                int sum = x + y;
-                resp.send(Http::Code::Ok, "The result of addition of "+std::to_string(x)+" and "+std::to_string(y)+" is "+std::to_string(sum)+"\n");
-              }
-              
-              int main(int argc, char* argv[])
-              {
-                using namespace Rest;
-                Router router;      // POST/GET/etc. route handler
-                Port port(9900);    // port to listen on
-                Address addr(Ipv4::any(), port);
-                std::shared_ptr<Http::Endpoint> endpoint = std::make_shared<Http::Endpoint>(addr);
-                auto opts = Http::Endpoint::options().threads(1);   // how many threads for the server
-                endpoint->init(opts);
-              
-                Routes::Post(router, "/add", Routes::bind(&add));
-              
-                endpoint->setHandler(router.handler());
-                endpoint->serve();
-              }
-            </pre>
-            <p>This code creates an endpoint that listens on port 9900, and when a POST request is made to the endpoint with a JSON
-              payload containing "x" and "y" fields, it will return the sum of the two numbers.</p>
-            <h2>Compiling the code</h2>
-            <p>To compile the code, you can use the following Makefile:</p>
-            <pre>
-              # C++17 required for Pistache!
-              CCFLAGS=-O2 --std=c++17 -lpistache
-              all: server
-              server:
-                  g++ api.cpp $(CCFLAGS) -o server
-                
-              clean:
-                  rm server
-            </pre>
-            
-            <p>The Makefile compiles the code with the C++17 standard and links the Pistache library to the binary file.</p>
-            <h2>Running the API</h2>
-            <p>To run the API, execute the generated binary file by running the following command in the terminal:</p>
-            <pre>./server</pre>
-            <p>The API will now be running on localhost:9900 and ready to handle incoming requests.</p>
-            <h2>Testing the API</h2>
-            <p>To test the API, use a tool like curl or Postman to send a POST request to the endpoint with a JSON payload
-              containing the input numbers as "x" and "y" fields. For example, use the following command to test the API using curl:
+    <main>
+      <section class="hero section">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Engineer diary, rebuilt for the web</p>
+            <h1>
+              Research paper reviews, practical ML notes, and software ideas that are
+              easier to revisit than a raw notebook dump.
+            </h1>
+            <p class="lede">
+              This site now works like a small editorial lab. The homepage highlights
+              current research writeups, while the side notes keep older API, PyTorch,
+              and problem-solving lessons within reach without letting the layout fall apart.
             </p>
-            <pre>
-              curl -i -X POST -H "Content-Type: application/json" -d '{"x": 5, "y": 3}' http://localhost:9900/add
-            </pre>
-            <p>This command sends a POST request to the endpoint at http://localhost:9900/add with a JSON payload containing the
-              numbers 5 and 3 as the "x" and "y" fields respectively. You should see the sum of the input numbers, in this case 8,
-              in the response.</p>
-            <p>It's also important to test for different scenarios like sending wrong data types, missing fields, etc to make sure
-              that the API is handling these cases and returning appropriate error messages.</p>
-            <p>In this article, we have covered the steps to create a simple RESTful API in C++ using the Pistache library in
-              Ubuntu. With the ability to handle incoming requests and return responses, you can now build more complex APIs and
-              expand the functionality to meet your needs.</p>
-        </article>
+            <div class="hero-actions">
+              <a class="button" href="#research">Read the research section</a>
+              <a class="button button-secondary" href="pytorch_framework/pytorch_framework.html">
+                Open PyTorch note
+              </a>
+            </div>
+            <div class="hero-stats" aria-label="Site highlights">
+              <article class="stat-card">
+                <span class="stat-value">3</span>
+                <span class="stat-label">paper reviews</span>
+              </article>
+              <article class="stat-card">
+                <span class="stat-value">2</span>
+                <span class="stat-label">evergreen lab notes</span>
+              </article>
+              <article class="stat-card">
+                <span class="stat-value">1</span>
+                <span class="stat-label">clean responsive shell</span>
+              </article>
+            </div>
+          </div>
+
+          <aside class="weather-card" data-weather-card>
+            <p class="panel-kicker">New Delhi right now</p>
+            <h2>Weather snapshot</h2>
+            <p class="weather-status" id="weather-status">
+              Pulling a fresh weather reading.
+            </p>
+            <div class="weather-grid">
+              <div class="weather-metric">
+                <span class="metric-label">Temperature</span>
+                <strong id="weather-temp">--</strong>
+              </div>
+              <div class="weather-metric">
+                <span class="metric-label">Humidity</span>
+                <strong id="weather-humidity">--</strong>
+              </div>
+              <div class="weather-metric">
+                <span class="metric-label">Conditions</span>
+                <strong id="weather-desc">--</strong>
+              </div>
+              <div class="weather-metric">
+                <span class="metric-label">Wind</span>
+                <strong id="weather-wind">--</strong>
+              </div>
+            </div>
+            <p class="weather-footnote">
+              Live data comes from Open-Meteo, so the site no longer ships a weather
+              API key in the browser.
+            </p>
+          </aside>
+        </div>
       </section>
-      <section class="main-section" id="Coding">
-        <header>Coding Tips</header>
-        <article>
-          <p>
-            In c++, some of tips to make running time more effieciens are as follows:<br>
-            <strong>19/12/2022</strong>
-            <ul>
-            <li>use addition in case of multiplication if possible</li>
-            <li>To count the number of 1s in an input: int __builtin_popcount (unsigned int x)</li>
-            <li>Be careful about duplicate (repeat same expression) computation</li>
-            
-            </ul>
-             
-          </p>
-        </article>
+
+      <section class="section" id="research">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">Research Reviews</p>
+            <h2>Three recent LLM papers, reformatted for the web</h2>
+            <p>
+              These were originally written as Medium-style explainers. They now live
+              here as cleaner web pages with real tables, readable equations, and a
+              calmer reading rhythm.
+            </p>
+          </div>
+
+          <div class="card-grid research-grid">
+            <article class="card research-card">
+              <p class="card-kicker">Test-time adaptation</p>
+              <h3>HullFT Explained Simply</h3>
+              <p>
+                A plain-English walkthrough of convex reconstruction, gradient caching,
+                and why test-time finetuning can be useful without becoming painfully slow.
+              </p>
+              <ul class="tag-row" aria-label="HullFT topics">
+                <li>LLM adaptation</li>
+                <li>Convex hull</li>
+                <li>Gradient caching</li>
+              </ul>
+              <div class="card-actions">
+                <a class="text-link" href="research/hullft.html">Read web edition</a>
+                <a class="text-link" href="https://medium.com/@amaragnihotri1/hullft-explained-simply-making-llms-adapt-at-test-time-without-becoming-too-slow-716b1af96b78">
+                  Medium version
+                </a>
+              </div>
+            </article>
+
+            <article class="card research-card">
+              <p class="card-kicker">Inference-time reasoning</p>
+              <h3>Reasoning with Sampling</h3>
+              <p>
+                Why random edits to a reasoning trace are wasteful, and how entropy-aware
+                cut points help a model revisit the decisions that actually matter.
+              </p>
+              <ul class="tag-row" aria-label="Reasoning with Sampling topics">
+                <li>Decision points</li>
+                <li>Entropy</li>
+                <li>Metropolis-Hastings</li>
+              </ul>
+              <div class="card-actions">
+                <a class="text-link" href="research/reasoning-with-sampling.html">Read web edition</a>
+                <a class="text-link" href="https://arxiv.org/abs/2605.30327">Paper</a>
+              </div>
+            </article>
+
+            <article class="card research-card">
+              <p class="card-kicker">Preference modeling</p>
+              <h3>In-Context Reward Adaptation</h3>
+              <p>
+                A beginner-friendly explanation of how reward models can infer a user or
+                domain's preference style from just a few demonstrations.
+              </p>
+              <ul class="tag-row" aria-label="In-Context Reward Adaptation topics">
+                <li>RLHF</li>
+                <li>Reward models</li>
+                <li>Preference shift</li>
+              </ul>
+              <div class="card-actions">
+                <a class="text-link" href="research/in-context-reward-adaptation.html">
+                  Read web edition
+                </a>
+                <a class="text-link" href="https://arxiv.org/abs/2605.30323">Paper</a>
+              </div>
+            </article>
+          </div>
+        </div>
       </section>
-      <section id="tribute-info">
-        <h3 id="headline">Time-line:</h3>
-        <ul>
-          <li><strong>15/12/2022</strong> - Webpage created</li>
-          <li>
-            <strong>17/12/2022</strong> - HTML5 tutorial on https://www.freecodecamp.org/
-          </li>
-          <li>
-            <strong>17/01/2023</strong> - API creation in python using Postman
-          </li>
-        </ul>
-        <blockquote cite="">
-          <p>
-          </p>
-          <cite></cite>
-        </blockquote>
-        <h3>
-          <!--If you have time, you should read more about this incredible human
-          being on his
-          <a id="tribute-link" href="https://en.wikipedia.org/wiki/Norman_Borlaug" target="_blank">Wikipedia entry</a>.-->
-        </h3>
+
+      <section class="section muted-section" id="notes">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">Lab Notes</p>
+            <h2>Older notes, reorganized so they stay useful</h2>
+            <p>
+              The original site buried everything inside one long page. These notes now
+              sit in smaller blocks so you can scan and jump without layout friction.
+            </p>
+          </div>
+
+          <div class="card-grid note-grid">
+            <article class="card note-card">
+              <h3>API Foundations</h3>
+              <p>
+                A compact refresher on endpoints, verbs, request parameters, headers,
+                request bodies, and why CRUD keeps showing up in web APIs.
+              </p>
+              <ul class="note-list">
+                <li>Safe vs idempotent calls</li>
+                <li>Request vs query parameters</li>
+                <li>REST versus SOAP</li>
+              </ul>
+              <a class="text-link" href="openapi.json">Open the OpenAPI artifact</a>
+            </article>
+
+            <article class="card note-card">
+              <h3>PyTorch Quickstart</h3>
+              <p>
+                A light onboarding note covering what PyTorch is and the quickest install
+                commands for `conda` and `pip`.
+              </p>
+              <ul class="note-list">
+                <li>Framework overview</li>
+                <li>Anaconda installation</li>
+                <li>`pip3 install torch torchvision`</li>
+              </ul>
+              <a class="text-link" href="pytorch_framework/pytorch_framework.html">Read the note</a>
+            </article>
+
+            <article class="card note-card">
+              <h3>Contest Coding Reminders</h3>
+              <p>
+                A tiny checklist of habits that help when runtime matters more than pretty code.
+              </p>
+              <ul class="note-list">
+                <li>Prefer cheaper arithmetic when it is valid</li>
+                <li>Use `__builtin_popcount` when counting set bits</li>
+                <li>Avoid recomputing the same expression in hot loops</li>
+              </ul>
+              <a class="text-link" href="#timeline">See the site timeline</a>
+            </article>
+          </div>
+        </div>
       </section>
-      
-      <aside> 
-         <p></p> 
-      </aside> 
-   
-      <footer> 
-         <p></p> 
-      </footer> 
+
+      <section class="section" id="timeline">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">Timeline</p>
+            <h2>Diary moments worth keeping</h2>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <span class="timeline-date">15 Dec 2022</span>
+              <p>The first version of this webpage was created.</p>
+            </article>
+            <article class="timeline-item">
+              <span class="timeline-date">17 Dec 2022</span>
+              <p>HTML5 tutorial notes from freeCodeCamp shaped the earliest draft.</p>
+            </article>
+            <article class="timeline-item">
+              <span class="timeline-date">17 Jan 2023</span>
+              <p>API creation notes using Postman were added to the diary.</p>
+            </article>
+            <article class="timeline-item">
+              <span class="timeline-date">31 May 2026</span>
+              <p>The site was rebuilt into a responsive editorial layout with a dedicated research review section.</p>
+            </article>
+          </div>
+        </div>
+      </section>
     </main>
-   </body> 
-</html> 
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <p>Built as a personal notebook for readable technical learning.</p>
+        <div class="footer-links">
+          <a href="#research">Research Reviews</a>
+          <a href="pytorch_framework/pytorch_framework.html">PyTorch note</a>
+          <a href="https://github.com/amar512-prog/amar512-prog.github.io">Repository</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
