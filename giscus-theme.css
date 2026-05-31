@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
+
+:root,
+html,
+body {
+  color-scheme: light;
+  --color-canvas-default: #fffaf0;
+  --color-canvas-overlay: #fffdf8;
+  --color-canvas-inset: #f6f0e3;
+  --color-canvas-subtle: #f8f1e3;
+  --color-border-default: rgba(67, 54, 31, 0.18);
+  --color-border-muted: rgba(67, 54, 31, 0.1);
+  --color-neutral-muted: rgba(184, 92, 56, 0.1);
+  --color-accent-fg: #2d6c63;
+  --color-accent-emphasis: #2d6c63;
+  --color-accent-muted: rgba(45, 108, 99, 0.16);
+  --color-accent-subtle: rgba(45, 108, 99, 0.1);
+  --color-success-fg: #2d6c63;
+  --color-attention-fg: #b85c38;
+  --color-danger-fg: #9a3b1b;
+  --color-done-fg: #6f4bb6;
+  --color-fg-default: #17322c;
+  --color-fg-muted: #4f5e57;
+  --color-fg-subtle: #68736d;
+  --color-primer-fg-disabled: #8a948e;
+  --color-btn-text: #17322c;
+  --color-btn-bg: #f5edde;
+  --color-btn-border: rgba(67, 54, 31, 0.16);
+  --color-btn-hover-bg: #efe4d0;
+  --color-btn-hover-border: rgba(67, 54, 31, 0.24);
+  --color-btn-active-bg: #e8d8be;
+  --color-btn-primary-text: #fffaf0;
+  --color-btn-primary-bg: #2d6c63;
+  --color-btn-primary-border: #2d6c63;
+  --color-btn-primary-hover-bg: #255950;
+  --color-btn-primary-hover-border: #255950;
+  --color-btn-primary-selected-bg: #1f4c45;
+  --color-input-bg: #fffdf8;
+  --color-input-disabled-bg: #f1eadc;
+  --color-input-border: rgba(67, 54, 31, 0.18);
+  --color-input-placeholder-text: #7b857f;
+  --color-input-contrast-bg: #fffdf8;
+  --color-action-list-item-default-hover-bg: #f7efe1;
+  --color-action-list-item-default-active-bg: #f1e4ce;
+  --color-menu-bg-active: #f1e4ce;
+  --color-social-reaction-bg-hover: rgba(184, 92, 56, 0.12);
+  --color-social-reaction-bg-reacted: rgba(45, 108, 99, 0.12);
+  --color-social-reaction-bg-reacted-hover: rgba(45, 108, 99, 0.18);
+  --color-social-reaction-border: rgba(67, 54, 31, 0.16);
+  --color-social-reaction-border-hover: rgba(67, 54, 31, 0.24);
+  --color-timeline-badge-bg: #fff4e9;
+}
+
+html,
+body {
+  background: #fffaf0;
+  color: #17322c;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+a {
+  color: #2d6c63;
+}
+
+::selection {
+  background: rgba(184, 92, 56, 0.18);
+}

@@ -657,6 +657,13 @@ figcaption {
 
 .page-chat__embed {
   max-width: 68ch;
+  padding: 0.4rem;
+  border-radius: calc(var(--radius-lg) + 0.15rem);
+  border: 1px solid rgba(67, 54, 31, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 252, 246, 0.96), rgba(248, 241, 227, 0.92));
+  box-shadow: 0 16px 34px rgba(23, 50, 44, 0.06);
+  overflow: hidden;
 }
 
 .page-chat__embed .giscus,

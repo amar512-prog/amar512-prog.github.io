@@ -1,5 +1,9 @@
 (function () {
   const mount = document.querySelector("[data-page-chat]");
+  const themeHref =
+    window.location.protocol === "http:" || window.location.protocol === "https:"
+      ? new URL("/giscus-theme.css?v=20260531g", window.location.origin).toString()
+      : "noborder_light";
 
   if (!mount) {
     return;
@@ -40,7 +44,7 @@
   script.setAttribute("data-reactions-enabled", "1");
   script.setAttribute("data-emit-metadata", "0");
   script.setAttribute("data-input-position", "bottom");
-  script.setAttribute("data-theme", "preferred_color_scheme");
+  script.setAttribute("data-theme", themeHref);
   script.setAttribute("data-lang", "en");
 
   mount.querySelector(".giscus")?.appendChild(script);
