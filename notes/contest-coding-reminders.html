@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contest Coding Reminders | Amar Agnihotri</title>
+    <meta
+      name="description"
+      content="An older Amar Agnihotri note, reformatted for the web, preserving contest coding reminders and the early website timeline."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="../styles.css?v=20260531a">
+  </head>
+  <body class="site-shell article-page">
+    <header class="site-header">
+      <div class="container header-bar">
+        <a class="brand" href="../index.html" aria-label="Back to homepage">
+          <span class="brand-mark">AA</span>
+          <span class="brand-copy">
+            <strong>Amar Agnihotri</strong>
+            <span>Research reviews, systems notes, and practical learning logs.</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../index.html#notes">Lab Notes</a>
+          <a href="../index.html#timeline">Timeline</a>
+          <a href="../research/hullft.html">Research</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="article-hero">
+        <div class="container">
+          <div class="article-shell">
+            <p class="eyebrow">Classic note, reformatted</p>
+            <p class="article-meta">Competitive programming • diary timeline preserved</p>
+            <h1>Contest coding reminders from the original diary</h1>
+            <p class="article-summary">
+              This page preserves the shorter note from the older site: a few runtime-minded
+              C++ reminders, plus the small timeline that marked the first versions of the
+              website and its early learning milestones.
+            </p>
+            <div class="article-actions">
+              <a class="button" href="../index.html#timeline">View the homepage timeline</a>
+              <a class="button button-secondary" href="../index.html#notes">Back to lab notes</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <article class="article-shell article-prose">
+            <h2>Contest Coding Tips</h2>
+            <p>
+              The original note was written on <strong>19 Dec 2022</strong> and kept only
+              a few short reminders. They are simple, but they still reflect the right
+              instinct for performance-sensitive coding.
+            </p>
+            <ul>
+              <li>Use addition in place of multiplication when that transformation is valid and cheaper.</li>
+              <li>To count the number of `1` bits in an input, use <code>__builtin_popcount(unsigned int x)</code>.</li>
+              <li>Be careful about duplicate computation. Repeating the same expression in a hot loop is an easy way to waste time.</li>
+            </ul>
+
+            <div class="callout">
+              The spirit of the original reminder was straightforward: in contests, small
+              inefficiencies add up quickly, especially inside repeated loops or heavily used helper logic.
+            </div>
+
+            <h2>Diary Timeline</h2>
+            <p>
+              The older site also carried a tiny timeline. I preserved it here so the note
+              still feels connected to the original diary format.
+            </p>
+
+            <div class="timeline">
+              <article class="timeline-item">
+                <span class="timeline-date">15 Dec 2022</span>
+                <p>Webpage created.</p>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-date">17 Dec 2022</span>
+                <p>HTML5 tutorial notes from <a class="text-link" href="https://www.freecodecamp.org/">freeCodeCamp</a>.</p>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-date">17 Jan 2023</span>
+                <p>API creation notes in Python using Postman were added to the diary.</p>
+              </article>
+            </div>
+
+            <div class="summary-box">
+              <p>
+                This note is short on purpose. It is less a full tutorial and more a small
+                “remember these when the clock is running” card from the earliest version of the site.
+              </p>
+            </div>
+
+            <div class="article-nav">
+              <a href="../notes/api-foundations.html">API Foundations</a>
+              <a href="../pytorch_framework/pytorch_framework.html">PyTorch Quickstart</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

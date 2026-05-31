@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>API Foundations | Amar Agnihotri</title>
+    <meta
+      name="description"
+      content="An older Amar Agnihotri note, reformatted for the web, covering API basics and a sample RESTful API in C++ with Pistache."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="../styles.css?v=20260531a">
+  </head>
+  <body class="site-shell article-page">
+    <header class="site-header">
+      <div class="container header-bar">
+        <a class="brand" href="../index.html" aria-label="Back to homepage">
+          <span class="brand-mark">AA</span>
+          <span class="brand-copy">
+            <strong>Amar Agnihotri</strong>
+            <span>Research reviews, systems notes, and practical learning logs.</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../index.html#notes">Lab Notes</a>
+          <a href="../openapi.json">OpenAPI Artifact</a>
+          <a href="../index.html#timeline">Timeline</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="article-hero">
+        <div class="container">
+          <div class="article-shell">
+            <p class="eyebrow">Classic note, reformatted</p>
+            <p class="article-meta">API basics • original diary material preserved</p>
+            <h1>API foundations and a sample RESTful API in C++</h1>
+            <p class="article-summary">
+              This page keeps the original API tutorial content from the older version of
+              the site, but lays it out in a calmer long-form format. It starts with core
+              API concepts and ends with a small Pistache-based C++ example.
+            </p>
+            <div class="article-actions">
+              <a class="button" href="../openapi.json">Open the OpenAPI artifact</a>
+              <a class="button button-secondary" href="../index.html#notes">Back to lab notes</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <article class="article-shell article-prose">
+            <h2>What is an API?</h2>
+            <p>
+              Application Programming Interfaces, or APIs, provide a way for different
+              pieces of code, or a human and code, to interact with one another. In the
+              context of the web, the term API is usually used for web APIs, where a
+              client sends requests and a server responds.
+            </p>
+
+            <h2>Types of API Calls</h2>
+            <ul>
+              <li><strong>Safe:</strong> a safe request does not modify data on the server.</li>
+              <li><strong>Idempotent:</strong> a request returns the same result no matter how many times it is called. It may change the server only on the first call.</li>
+            </ul>
+
+            <h2>Structure of an API Request</h2>
+            <p>
+              Every API request needs an endpoint and an action. In web APIs, the
+              endpoint is usually a URL because it identifies the resource the server
+              should interact with. If an endpoint starts with `/` instead of `http` or
+              `www`, it usually means the base URL has been left out.
+            </p>
+            <p>
+              API actions, also known as verbs, specify the desired operation on the
+              resource. The most common actions are `GET`, `POST`, `PUT`, and `DELETE`.
+              These are often grouped as CRUD: Create, Read, Update, and Delete.
+            </p>
+            <p>
+              Choosing the right action matters. `POST` is commonly used to create new
+              objects, `GET` to read existing information, `PUT` to modify existing
+              objects, and `DELETE` to remove them. `PATCH`, `OPTIONS`, and `HEAD` are
+              also used, but less frequently.
+            </p>
+
+            <h2>API Parameters</h2>
+            <p>
+              API parameters help create standard structure in an API. They let similar
+              things be grouped together and make it easier to retrieve specific
+              information.
+            </p>
+
+            <h3>Request Parameters</h3>
+            <p>Example:</p>
+            <pre class="code-block">GET https://api.github.com/users/:{username}/repos</pre>
+            <p>
+              In this example, `username` is a request parameter. These parameters act as
+              replaceable strings in the API endpoint and are common in web APIs. They can
+              also be represented using curly braces instead of a colon.
+            </p>
+
+            <h3>Query Parameters</h3>
+            <p>
+              Query parameters act as filters or additional actions that can be applied to
+              an endpoint. They are represented by a question mark in the URL and use a
+              key-value structure.
+            </p>
+            <pre class="code-block">GET https://api.github.com/user/repos?type=member</pre>
+            <p>This example shows repositories that the authenticated user is a member of.</p>
+
+            <h2>Headers, Body, and Response</h2>
+            <p>
+              Every API request includes headers that provide background information about
+              the client sending the request.
+            </p>
+            <p>
+              Many requests, especially `POST` and `PUT`, also include a body describing
+              the resource attributes. This body can be form data, encoded form data, raw
+              data, binary data, or even GraphQL data.
+            </p>
+            <p>
+              The API response is sent by the server after it processes the request. A
+              response can include a body, cookies, and headers.
+            </p>
+
+            <h2>Types of APIs</h2>
+            <p>
+              <strong>SOAP</strong>, or Simple Object Access Protocol, is an XML-based
+              messaging protocol used to exchange structured data. It has more overhead
+              than RESTful APIs and was designed for stricter enterprise-style integrations.
+            </p>
+            <p>
+              <strong>REST</strong>, or Representational State Transfer, is a lightweight
+              web architecture and communication style widely used for web services. It is
+              generally simpler to develop and maintain than SOAP.
+            </p>
+
+            <h2>Sample RESTful API in C++ Using Pistache</h2>
+            <p>
+              The original note also included a simple Ubuntu walkthrough for building a
+              RESTful API in C++ with the Pistache library. The goal is a tiny API that
+              accepts two numbers and returns their sum.
+            </p>
+
+            <h3>Installing GCC and Pistache</h3>
+            <p>Install GCC:</p>
+            <pre class="code-block">sudo apt-get install g++</pre>
+            <p>Install Pistache:</p>
+            <pre class="code-block">sudo add-apt-repository ppa:pistache+team/stable
+sudo apt update
+sudo apt install libpistache-dev</pre>
+
+            <h3>Creating the API</h3>
+            <p>Create a file called <code>api.cpp</code> with the following code:</p>
+            <pre class="code-block">#include &lt;pistache/endpoint.h&gt;
+#include &lt;pistache/http.h&gt;
+#include &lt;pistache/router.h&gt;
+#include "rapidjson/document.h"
+#include &lt;iostream&gt;
+
+using namespace Pistache;
+
+void add(const Rest::Request& req, Http::ResponseWriter resp)
+{
+  rapidjson::Document doc;
+  doc.Parse(req.body().c_str());
+  int x = doc.HasMember("x") ? doc["x"].GetInt() : 0;
+  int y = doc.HasMember("y") ? doc["y"].GetInt() : 0;
+  int sum = x + y;
+  resp.send(
+    Http::Code::Ok,
+    "The result of addition of " + std::to_string(x) +
+    " and " + std::to_string(y) +
+    " is " + std::to_string(sum) + "\n"
+  );
+}
+
+int main(int argc, char* argv[])
+{
+  using namespace Rest;
+  Router router;
+  Port port(9900);
+  Address addr(Ipv4::any(), port);
+  std::shared_ptr&lt;Http::Endpoint&gt; endpoint =
+    std::make_shared&lt;Http::Endpoint&gt;(addr);
+  auto opts = Http::Endpoint::options().threads(1);
+  endpoint-&gt;init(opts);
+
+  Routes::Post(router, "/add", Routes::bind(&add));
+
+  endpoint-&gt;setHandler(router.handler());
+  endpoint-&gt;serve();
+}</pre>
+
+            <p>
+              This code creates an endpoint listening on port `9900`. When a `POST`
+              request is sent with a JSON payload containing `x` and `y`, the API returns
+              the sum of the two numbers.
+            </p>
+
+            <h3>Compiling the Code</h3>
+            <p>A simple Makefile from the original note:</p>
+            <pre class="code-block"># C++17 required for Pistache!
+CCFLAGS=-O2 --std=c++17 -lpistache
+
+all: server
+
+server:
+    g++ api.cpp $(CCFLAGS) -o server
+
+clean:
+    rm server</pre>
+
+            <h3>Running the API</h3>
+            <pre class="code-block">./server</pre>
+            <p>The API should now be running on <code>localhost:9900</code>.</p>
+
+            <h3>Testing the API</h3>
+            <p>You can test it with <code>curl</code>:</p>
+            <pre class="code-block">curl -i -X POST -H "Content-Type: application/json" \
+  -d '{"x": 5, "y": 3}' \
+  http://localhost:9900/add</pre>
+            <p>
+              This sends a JSON payload with `x = 5` and `y = 3` and should return the
+              sum, which is `8`. It is also worth testing incorrect types or missing
+              fields to make sure the API responds sensibly in edge cases.
+            </p>
+
+            <div class="summary-box">
+              <p>
+                This older note still holds up as a quick primer: understand endpoints,
+                verbs, parameters, headers, and payloads first, then reinforce the ideas
+                by building one tiny RESTful API yourself.
+              </p>
+            </div>
+
+            <div class="article-nav">
+              <a href="../notes/contest-coding-reminders.html">Next: Contest Coding Reminders</a>
+              <a href="../pytorch_framework/pytorch_framework.html">PyTorch Quickstart</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
