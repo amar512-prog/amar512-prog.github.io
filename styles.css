@@ -624,6 +624,32 @@ figcaption {
   padding-top: 0;
 }
 
+.page-support-section {
+  padding-bottom: 0;
+}
+
+.page-support {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.page-support__copy {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 52rem;
+}
+
+.page-support__intro {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.page-support__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1rem;
+}
+
 .page-chat {
   display: grid;
   gap: 1.35rem;
@@ -926,6 +952,10 @@ figcaption {
   .page-chat__toolbar,
   .page-chat__owner-tools {
     align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .page-support__actions {
     flex-direction: column;
   }
 
