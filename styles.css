@@ -651,6 +651,14 @@ figcaption {
   gap: 0.9rem;
 }
 
+.page-chat__embed {
+  max-width: 68ch;
+}
+
+.page-chat__embed .utterances {
+  max-width: 100%;
+}
+
 .page-chat__message,
 .page-chat__status,
 .page-chat__empty {
