@@ -628,6 +628,10 @@ figcaption {
   padding-bottom: 0;
 }
 
+.page-support-section[hidden] {
+  display: none;
+}
+
 .page-support {
   display: grid;
   gap: 1.2rem;
