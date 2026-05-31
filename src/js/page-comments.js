@@ -5,48 +5,43 @@
     return;
   }
 
-  const repo = "amar512-prog/amar512-prog.github.io";
-  const pageKey = window.location.pathname.replace(/^\/+/, "") || "index.html";
-  const pageTitle =
-    document.querySelector("h1")?.textContent?.trim() || document.title.trim();
-  const pageUrl = `${window.location.origin}${window.location.pathname}`;
-  const issueTitle = `Page discussion: ${pageKey}`;
-  const searchQuery = `is:issue repo:${repo} in:title "${issueTitle}"`;
-  const searchUrl = `https://github.com/${repo}/issues?q=${encodeURIComponent(searchQuery)}`;
-  const newIssueBody = [
-    `Page title: ${pageTitle}`,
-    `Page path: /${pageKey}`,
-    `Page URL: ${pageUrl}`,
-    "",
-    "Use this issue as the public discussion thread for this page."
-  ].join("\n");
-  const newIssueUrl =
-    `https://github.com/${repo}/issues/new?title=${encodeURIComponent(issueTitle)}` +
-    `&body=${encodeURIComponent(newIssueBody)}`;
-
   mount.innerHTML = `
     <div class="page-chat__head">
       <p class="eyebrow">Discussion</p>
-      <h2>Discuss this page on GitHub</h2>
+      <h2>Join the conversation</h2>
       <p class="page-chat__intro">
-        Each article and note can have one shared GitHub issue thread keyed to its page path.
-        If a thread already exists, open it. If not, start one with the prefilled draft below.
+        Comments here are powered by GitHub Discussions. Sign in with GitHub if you want
+        to ask a question, leave a note, or react to a post.
       </p>
     </div>
 
     <div class="page-chat__status">
       <p>
-        This page uses the repository issue tracker instead of an embedded app, so the
-        discussion stays readable even when the site is hosted statically.
+        This thread is mapped to the current page path, so each note or paper review keeps
+        its own discussion stream.
       </p>
-      <div class="article-actions page-chat__actions">
-        <a class="button" href="${searchUrl}" target="_blank" rel="noreferrer">
-          View page thread
-        </a>
-        <a class="button button-secondary" href="${newIssueUrl}" target="_blank" rel="noreferrer">
-          Start thread
-        </a>
-      </div>
+    </div>
+
+    <div class="page-chat__embed">
+      <div class="giscus"></div>
     </div>
   `;
+
+  const script = document.createElement("script");
+  script.src = "https://giscus.app/client.js";
+  script.async = true;
+  script.crossOrigin = "anonymous";
+  script.setAttribute("data-repo", "amar512-prog/amar512-prog.github.io");
+  script.setAttribute("data-repo-id", "R_kgDOInzVeg");
+  script.setAttribute("data-category", "Announcements");
+  script.setAttribute("data-category-id", "DIC_kwDOInzVes4C-MbK");
+  script.setAttribute("data-mapping", "pathname");
+  script.setAttribute("data-strict", "0");
+  script.setAttribute("data-reactions-enabled", "1");
+  script.setAttribute("data-emit-metadata", "0");
+  script.setAttribute("data-input-position", "bottom");
+  script.setAttribute("data-theme", "preferred_color_scheme");
+  script.setAttribute("data-lang", "en");
+
+  mount.querySelector(".giscus")?.appendChild(script);
 })();
